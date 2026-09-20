@@ -1,0 +1,39 @@
+<RCC>
+  <qresource prefix="/vestra/i18n">
+    <file alias="en.json">../../../translations/en/vestra.json</file>
+    <file alias="ru.json">../../../translations/ru/vestra.json</file>
+  </qresource>
+  <qresource prefix="/vestra/icons">
+    <file alias="new.svg">icons/new.svg</file>
+    <file alias="open.svg">icons/open.svg</file>
+    <file alias="save.svg">icons/save.svg</file>
+    <file alias="save-as.svg">icons/save-as.svg</file>
+    <file alias="export-pdf.svg">icons/export-pdf.svg</file>
+    <file alias="print.svg">icons/print.svg</file>
+    <file alias="undo.svg">icons/undo.svg</file>
+    <file alias="redo.svg">icons/redo.svg</file>
+    <file alias="cut.svg">icons/cut.svg</file>
+    <file alias="copy.svg">icons/copy.svg</file>
+    <file alias="paste.svg">icons/paste.svg</file>
+    <file alias="bold.svg">icons/bold.svg</file>
+    <file alias="italic.svg">icons/italic.svg</file>
+    <file alias="underline.svg">icons/underline.svg</file>
+    <file alias="text-color.svg">icons/text-color.svg</file>
+    <file alias="highlight.svg">icons/highlight.svg</file>
+    <file alias="bullets.svg">icons/bullets.svg</file>
+    <file alias="numbering.svg">icons/numbering.svg</file>
+    <file alias="align-left.svg">icons/align-left.svg</file>
+    <file alias="align-center.svg">icons/align-center.svg</file>
+    <file alias="align-right.svg">icons/align-right.svg</file>
+    <file alias="indent.svg">icons/indent.svg</file>
+    <file alias="outdent.svg">icons/outdent.svg</file>
+    <file alias="table.svg">icons/table.svg</file>
+    <file alias="image.svg">icons/image.svg</file>
+    <file alias="search.svg">icons/search.svg</file>
+    <file alias="replace.svg">icons/replace.svg</file>
+    <file alias="zoom-in.svg">icons/zoom-in.svg</file>
+    <file alias="zoom-out.svg">icons/zoom-out.svg</file>
+    <file alias="page-view.svg">icons/page-view.svg</file>
+  </qresource>
+</RCC>
+

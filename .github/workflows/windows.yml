@@ -1,0 +1,57 @@
+name: Windows x64
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: windows-2022
+    timeout-minutes: 30
+
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Enable MSVC environment
+        uses: ilammy/msvc-dev-cmd@v1
+        with:
+          arch: x64
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: 6.8.3
+          arch: win64_msvc2022_64
+          modules: qtpdf
+          cache: true
+
+      - name: Configure
+        run: >-
+          cmake -S . -B build -G Ninja
+          -DCMAKE_BUILD_TYPE=Release
+          -DBUILD_TESTING=ON
+          -DVESTRA_ENABLE_LIBREOFFICE=OFF
+          -DVESTRA_ENABLE_PDFIUM=OFF
+          -DVESTRA_ENABLE_QT_PDF=ON
+
+      - name: Build
+        run: cmake --build build --parallel
+
+      - name: Deploy worker runtime for IPC integration test
+        run: |
+          windeployqt --no-translations build/bin/vestra-document-worker.exe
+          windeployqt --no-translations build/bin/vestra-pdf.exe
+
+      - name: Test
+        run: ctest --test-dir build --output-on-failure -C Release
+
+      - name: Verify formatting
+        shell: pwsh
+        run: |
+          $files = git ls-files '*.cpp' '*.h'
+          clang-format --dry-run --Werror $files
+

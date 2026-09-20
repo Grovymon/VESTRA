@@ -1,0 +1,13 @@
+/build*/
+/dist/
+/.cache/
+/.idea/
+/.vs/
+/.vscode/
+CMakeUserPresets.json
+*.user
+*.suo
+*.VC.db
+aqtinstall.log
+*.pdb
+
