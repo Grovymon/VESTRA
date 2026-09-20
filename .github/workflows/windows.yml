@@ -55,3 +55,37 @@ jobs:
           $files = git ls-files '*.cpp' '*.h'
           clang-format --dry-run --Werror $files
 
+      - name: Package portable Beta build
+        shell: pwsh
+        run: |
+          $stage = 'dist/Vestra-0.1.0-beta-win64'
+          New-Item -ItemType Directory -Force -Path $stage | Out-Null
+          $executables = @(
+            'vestra.exe',
+            'vestra-writer.exe',
+            'vestra-sheets.exe',
+            'vestra-slides.exe',
+            'vestra-pdf.exe',
+            'vestra-document-worker.exe'
+          )
+          foreach ($executable in $executables) {
+            Copy-Item "build/bin/$executable" "$stage/$executable"
+          }
+          Copy-Item README.md, LICENSE, THIRD_PARTY_LICENSES.md $stage
+          Copy-Item docs/README_RU.md "$stage/README_RU.md"
+          windeployqt --release --compiler-runtime --no-translations --dir $stage `
+            "$stage/vestra.exe" `
+            "$stage/vestra-writer.exe" `
+            "$stage/vestra-sheets.exe" `
+            "$stage/vestra-slides.exe" `
+            "$stage/vestra-pdf.exe" `
+            "$stage/vestra-document-worker.exe"
+          Compress-Archive -Path $stage -DestinationPath 'dist/Vestra-0.1.0-beta-win64.zip'
+
+      - name: Upload portable Beta archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: Vestra-0.1.0-beta-win64
+          path: dist/Vestra-0.1.0-beta-win64.zip
+          if-no-files-found: error
+
